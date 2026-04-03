@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { CITY_PAIRS, TIMEZONE_DATA, getOffsetDiff, getReferenceTable } from '../../lib/timezone-pairs';
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from '../../components/SchemaMarkup';
+import AdSense from '../../components/AdSense';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
@@ -111,6 +112,9 @@ export default function ConvertPage({ pair, from, to, table, offsetDiff }) {
             </div>
           </div>
 
+          {/* Ad slot — between table and FAQ */}
+          <AdSense slot="horizontal" />
+
           {/* FAQ */}
           <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', margin: '0 0 20px' }}>
@@ -143,6 +147,9 @@ export default function ConvertPage({ pair, from, to, table, offsetDiff }) {
               })}
             </div>
           </div>
+
+          {/* Ad slot — bottom */}
+          <AdSense slot="horizontal" />
 
           {/* Back link */}
           <div style={{ textAlign: 'center' }}>

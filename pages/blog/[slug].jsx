@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BLOG_POSTS, getBlogPost } from '../../lib/blog-posts';
 import { FAQSchema, BreadcrumbSchema } from '../../components/SchemaMarkup';
 import { CITY_PAIRS, TIMEZONE_DATA } from '../../lib/timezone-pairs';
+import AdSense from '../../components/AdSense';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
@@ -96,6 +97,9 @@ export default function BlogPost({ post }) {
             ))}
           </article>
 
+          {/* Ad slot — between article and FAQ (high visibility) */}
+          <AdSense slot="horizontal" />
+
           {/* FAQ section */}
           <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', margin: '0 0 20px' }}>❓ Common Questions</h2>
@@ -125,6 +129,9 @@ export default function BlogPost({ post }) {
               </div>
             </div>
           )}
+
+          {/* Ad slot — bottom of page */}
+          <AdSense slot="horizontal" />
 
           {/* Back */}
           <div style={{ textAlign: 'center' }}>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import TimeConverter from '../components/TimeConverter';
 import MeetingPlanner from '../components/MeetingPlanner';
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
+import AdSense from '../components/AdSense';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
@@ -117,6 +118,9 @@ export default function Home() {
             <TimeConverter headingOverride="Convert Time Zones Instantly" />
           </section>
 
+          {/* Ad slot — between converter and meeting planner */}
+          <AdSense slot="horizontal" />
+
           {/* MeetingPlanner with SEO-optimized heading */}
           <section aria-label="Global Meeting Planner">
             <MeetingPlanner headingOverride="Find the Best Meeting Time Across Time Zones" />
@@ -151,6 +155,9 @@ export default function Home() {
           </div>
 
           <FAQ />
+
+          {/* Ad slot — after FAQ */}
+          <AdSense slot="horizontal" />
 
           {/* Tips section with SEO heading */}
           <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
