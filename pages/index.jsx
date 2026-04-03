@@ -4,7 +4,7 @@ import TimeConverter from '../components/TimeConverter';
 import MeetingPlanner from '../components/MeetingPlanner';
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone-converter.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
 const faqs = [
   { q: 'What is the best time to schedule a global meeting?', a: 'Look for times when most team members are within business hours (9 AM to 6 PM). For very distributed teams, early morning or late afternoon often works best to minimize night-time calls. Use the Meeting Planner above to find the optimal overlap.' },

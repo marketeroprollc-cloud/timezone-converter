@@ -4,7 +4,7 @@ import { BLOG_POSTS, getBlogPost } from '../../lib/blog-posts';
 import { FAQSchema, BreadcrumbSchema } from '../../components/SchemaMarkup';
 import { CITY_PAIRS, TIMEZONE_DATA } from '../../lib/timezone-pairs';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone-converter.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
 export async function getStaticPaths() {
   return {

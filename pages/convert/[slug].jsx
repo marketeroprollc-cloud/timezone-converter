@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { CITY_PAIRS, TIMEZONE_DATA, getOffsetDiff, getReferenceTable } from '../../lib/timezone-pairs';
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from '../../components/SchemaMarkup';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone-converter.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
 export async function getStaticPaths() {
   return {

@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone-converter.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
 const CITY_PAIR_SLUGS = [
   'est-to-pst', 'pst-to-est', 'gmt-to-est', 'est-to-gmt',
@@ -12,6 +12,15 @@ const BLOG_SLUGS = [
   'best-time-schedule-meeting-est-pst',
   'how-to-schedule-meeting-across-time-zones',
   'utc-explained',
+  'daylight-saving-time-explained',
+  'time-zones-united-states',
+  'india-time-zone-ist',
+  'gmt-vs-utc-difference',
+  'new-york-to-london-time-difference',
+  'tokyo-to-new-york-time',
+  'sydney-to-london-time',
+  'time-zone-abbreviations',
+  'remote-work-time-zone-tips',
 ];
 
 function generateSitemap() {
