@@ -235,6 +235,8 @@ export default function Home() {
               ))}
               <Link href="/blog" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Blog</Link>
               <Link href="/privacy" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
+              <Link href="/cookies" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Cookie Policy</Link>
+              <Link href="/legal" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Legal Notice</Link>
             </div>
           </div>
         </div>

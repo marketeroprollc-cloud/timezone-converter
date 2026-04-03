@@ -255,6 +255,8 @@ export default function ConvertPage({ pair, from, to, table, offsetDiff }) {
               ← Back to Time Zone Converter
             </Link>
             <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>Privacy Policy</Link>
+            <Link href="/cookies" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>Cookie Policy</Link>
+            <Link href="/legal" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>Legal Notice</Link>
           </div>
         </div>
       </main>

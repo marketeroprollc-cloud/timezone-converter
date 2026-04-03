@@ -30,6 +30,8 @@ function generateSitemap() {
     { url: `${SITE_URL}/`, priority: '1.0', changefreq: 'daily' },
     { url: `${SITE_URL}/blog`, priority: '0.8', changefreq: 'weekly' },
     { url: `${SITE_URL}/privacy`, priority: '0.3', changefreq: 'yearly' },
+    { url: `${SITE_URL}/cookies`, priority: '0.3', changefreq: 'yearly' },
+    { url: `${SITE_URL}/legal`, priority: '0.3', changefreq: 'yearly' },
   ];
 
   const cityPairPages = CITY_PAIR_SLUGS.map(slug => ({
