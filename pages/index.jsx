@@ -198,7 +198,7 @@ export default function Home() {
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', margin: '0 0 8px' }}>
               © 2025 Time Zone Converter · Built for remote teams · Free forever
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
               {[
                 { label: 'EST to PST', slug: 'est-to-pst' },
                 { label: 'GMT to EST', slug: 'gmt-to-est' },
@@ -207,6 +207,7 @@ export default function Home() {
               ].map(({ label, slug }) => (
                 <a key={slug} href={`/convert/${slug}`} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>{label}</a>
               ))}
+              <Link href="/privacy" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
             </div>
           </div>
         </div>

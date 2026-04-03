@@ -152,10 +152,11 @@ export default function ConvertPage({ pair, from, to, table, offsetDiff }) {
           <AdSense slot="horizontal" />
 
           {/* Back link */}
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
             <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
               ← Back to Time Zone Converter
             </Link>
+            <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>Privacy Policy</Link>
           </div>
         </div>
       </main>
