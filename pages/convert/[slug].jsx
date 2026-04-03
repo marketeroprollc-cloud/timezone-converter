@@ -6,6 +6,64 @@ import AdSense from '../../components/AdSense';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://timezone.business';
 
+// Map timezone keys → relevant blog posts
+const BLOG_BY_TZ = {
+  est: [
+    { label: 'Best Time to Schedule EST ↔ PST Meetings', slug: 'best-time-schedule-meeting-est-pst' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'US Time Zones Explained', slug: 'time-zones-united-states' },
+  ],
+  pst: [
+    { label: 'Best Time to Schedule EST ↔ PST Meetings', slug: 'best-time-schedule-meeting-est-pst' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'US Time Zones Explained', slug: 'time-zones-united-states' },
+  ],
+  gmt: [
+    { label: 'GMT vs UTC — What Is the Difference?', slug: 'gmt-vs-utc-difference' },
+    { label: 'New York to London Time Difference', slug: 'new-york-to-london-time-difference' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+  ],
+  utc: [
+    { label: 'UTC Explained: What Is UTC Offset?', slug: 'utc-explained' },
+    { label: 'GMT vs UTC — What Is the Difference?', slug: 'gmt-vs-utc-difference' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+  ],
+  ist: [
+    { label: 'India Time Zone (IST) Guide', slug: 'india-time-zone-ist' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'Remote Work Time Zone Tips', slug: 'remote-work-time-zone-tips' },
+  ],
+  cet: [
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'Daylight Saving Time Explained', slug: 'daylight-saving-time-explained' },
+    { label: 'Remote Work Time Zone Tips', slug: 'remote-work-time-zone-tips' },
+  ],
+  jst: [
+    { label: 'Tokyo to New York Time Difference', slug: 'tokyo-to-new-york-time' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'Remote Work Time Zone Tips', slug: 'remote-work-time-zone-tips' },
+  ],
+  aest: [
+    { label: 'Sydney to London Time Difference', slug: 'sydney-to-london-time' },
+    { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+    { label: 'Remote Work Time Zone Tips', slug: 'remote-work-time-zone-tips' },
+  ],
+};
+
+function getRelevantBlogPosts(fromKey, toKey) {
+  const seen = new Set();
+  const posts = [];
+  for (const key of [fromKey, toKey]) {
+    for (const post of (BLOG_BY_TZ[key] || [])) {
+      if (!seen.has(post.slug)) {
+        seen.add(post.slug);
+        posts.push(post);
+      }
+    }
+  }
+  return posts.slice(0, 4);
+}
+
 export async function getStaticPaths() {
   return {
     paths: CITY_PAIRS.map(p => ({ params: { slug: p.slug } })),
@@ -129,6 +187,46 @@ export default function ConvertPage({ pair, from, to, table, offsetDiff }) {
               ))}
             </div>
           </div>
+
+          {/* CTA — link to homepage tool */}
+          <div style={{ background: 'linear-gradient(135deg, #1e3a8a, #4c1d95)', borderRadius: '20px', padding: '28px 32px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '24px' }}>⏰</span>
+              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'white', margin: 0 }}>
+                Try the Free Time Zone Converter
+              </h2>
+            </div>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: '1.6' }}>
+              Convert any time zone instantly and plan global meetings with our free tool — no signup required.
+            </p>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <Link href="/" style={{ display: 'inline-block', background: 'white', color: '#1e3a8a', fontWeight: '700', fontSize: '14px', padding: '10px 22px', borderRadius: '10px', textDecoration: 'none' }}>
+                Open Time Zone Converter →
+              </Link>
+              <Link href="/" style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', color: 'white', fontWeight: '600', fontSize: '14px', padding: '10px 22px', borderRadius: '10px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>
+                Meeting Planner
+              </Link>
+            </div>
+          </div>
+
+          {/* Blog guides — contextual internal links */}
+          {(() => {
+            const posts = getRelevantBlogPosts(pair.from, pair.to);
+            if (!posts.length) return null;
+            return (
+              <div style={{ background: 'white', borderRadius: '20px', padding: '28px 32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#1e293b', margin: '0 0 16px' }}>📖 Related Guides</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {posts.map(post => (
+                    <Link key={post.slug} href={`/blog/${post.slug}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0', color: '#1e293b', fontSize: '14px', fontWeight: '600', textDecoration: 'none' }}>
+                      <span style={{ color: '#3b82f6', fontSize: '16px' }}>→</span>
+                      {post.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Related conversions */}
           <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
