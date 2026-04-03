@@ -39,7 +39,7 @@ export default function LegalNotice() {
             {[
               {
                 title: '1. Website Owner',
-                content: 'This website, timezone.business, is operated as a free online service providing time zone conversion and meeting planning tools. For inquiries regarding the operation of this website, please contact us at: privacy@timezone.business.',
+                content: 'This website, timezone.business, is owned and operated by NM MARKETING E INVERSIONES SL, a company registered in Spain. Registered address: Calle Adriano 5, 21002 Huelva, Spain. Tax ID (CIF): B56508393. Contact: privacy@timezone.business.',
               },
               {
                 title: '2. Purpose of the Website',
@@ -75,7 +75,7 @@ export default function LegalNotice() {
               },
               {
                 title: '10. Contact',
-                content: 'For any legal inquiries or notices, please contact us at: privacy@timezone.business or by visiting timezone.business.',
+                content: 'NM MARKETING E INVERSIONES SL — Calle Adriano 5, 21002 Huelva, Spain — CIF: B56508393 — Email: privacy@timezone.business',
               },
             ].map((section, i, arr) => (
               <div key={i} style={{ marginBottom: i < arr.length - 1 ? '28px' : 0 }}>

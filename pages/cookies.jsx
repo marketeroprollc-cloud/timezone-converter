@@ -71,7 +71,7 @@ export default function CookiePolicy() {
               },
               {
                 title: '9. Contact Us',
-                content: 'If you have any questions about our use of cookies, please contact us at: privacy@timezone.business',
+                content: 'NM MARKETING E INVERSIONES SL — Calle Adriano 5, 21002 Huelva, Spain — CIF: B56508393 — Email: privacy@timezone.business',
               },
             ].map((section, i, arr) => (
               <div key={i} style={{ marginBottom: i < arr.length - 1 ? '28px' : 0 }}>

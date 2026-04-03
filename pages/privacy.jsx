@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             {[
               {
                 title: '1. Who We Are',
-                content: 'This Privacy Policy applies to timezone.business ("we", "our", or "us"), a free online time zone converter and meeting planner. Our website is located at https://timezone.business. If you have any questions about this policy, you can contact us at privacy@timezone.business.',
+                content: 'This Privacy Policy applies to timezone.business ("we", "our", or "us"), owned and operated by NM MARKETING E INVERSIONES SL, CIF B56508393, registered at Calle Adriano 5, 21002 Huelva, Spain. Our website is located at https://timezone.business. If you have any questions about this policy, you can contact us at privacy@timezone.business.',
               },
               {
                 title: '2. What Information We Collect',
@@ -79,7 +79,7 @@ export default function PrivacyPolicy() {
               },
               {
                 title: '11. Contact Us',
-                content: 'If you have any questions about this Privacy Policy, please contact us at: privacy@timezone.business or by visiting timezone.business.',
+                content: 'NM MARKETING E INVERSIONES SL — Calle Adriano 5, 21002 Huelva, Spain — CIF: B56508393 — Email: privacy@timezone.business — Web: timezone.business.',
               },
             ].map((section, i) => (
               <div key={i} style={{ marginBottom: i < 10 ? '28px' : 0 }}>
