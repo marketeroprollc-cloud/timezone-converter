@@ -44,3 +44,60 @@ input, select {
 .table-timezone tr:nth-child(even) {
   @apply bg-gray-50;
 }
+
+/* TimeConverter responsive grid */
+.tc-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 640px) {
+  .tc-inputs-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* MultiSelect dropdown — full width on mobile */
+.tc-multiselect-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  min-width: 240px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  z-index: 100;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+@media (max-width: 639px) {
+  .tc-multiselect-dropdown {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 16px;
+    max-height: 60vh;
+    border-radius: 16px;
+  }
+}
+
+/* Results grid */
+.tc-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .tc-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}

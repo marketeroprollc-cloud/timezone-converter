@@ -1,4 +1,15 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+
+function useIsMobile(breakpoint = 600) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const TIMEZONES = [
   { abbr: 'UTC',  name: 'UTC',           city: 'Universal Time',  offset: 'UTC',                    flag: '🌐' },
@@ -30,7 +41,7 @@ const OFFSETS = {
   'America/Sao_Paulo': -3 * 60,
 };
 
-function MultiSelectDropdown({ selected, onChange }) {
+function MultiSelectDropdown({ selected, onChange, isMobile }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -84,18 +95,16 @@ function MultiSelectDropdown({ selected, onChange }) {
       </button>
 
       {open && (
-        <div style={{
-          position: 'absolute',
-          top: 'calc(100% + 6px)',
-          left: 0,
-          right: 0,
-          background: 'white',
-          border: '2px solid #e2e8f0',
-          borderRadius: '12px',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
-          zIndex: 100,
-          maxHeight: '280px',
-          overflowY: 'auto',
+        <div style={isMobile ? {
+          position: 'fixed', left: '12px', right: '12px', bottom: '12px',
+          background: 'white', border: '2px solid #e2e8f0', borderRadius: '16px',
+          boxShadow: '0 -4px 30px rgba(0,0,0,0.15)', zIndex: 200,
+          maxHeight: '60vh', overflowY: 'auto',
+        } : {
+          position: 'absolute', top: 'calc(100% + 6px)', left: 0, right: 0, minWidth: '240px',
+          background: 'white', border: '2px solid #e2e8f0', borderRadius: '12px',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.12)', zIndex: 100,
+          maxHeight: '280px', overflowY: 'auto',
         }}>
           {TIMEZONES.map(tz => {
             const isSelected = selected.includes(tz.offset);
@@ -143,6 +152,7 @@ function MultiSelectDropdown({ selected, onChange }) {
 }
 
 export default function TimeConverter({ headingOverride } = {}) {
+  const isMobile = useIsMobile();
   const [sourceTime, setSourceTime] = useState('12:00');
   const [sourceDate, setSourceDate] = useState(new Date().toISOString().split('T')[0]);
   const [sourceZone, setSourceZone] = useState('UTC');
@@ -176,7 +186,7 @@ export default function TimeConverter({ headingOverride } = {}) {
   }, [sourceTime, sourceDate, sourceZone, selectedZones]);
 
   return (
-    <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
+    <div style={{ background: 'white', borderRadius: '20px', padding: 'clamp(20px, 4vw, 32px)', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
       <div style={{ marginBottom: '28px' }}>
         <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', borderRadius: '10px', padding: '6px 10px', fontSize: '18px' }}>⏰</span>
@@ -186,7 +196,7 @@ export default function TimeConverter({ headingOverride } = {}) {
       </div>
 
       {/* Inputs row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px', marginBottom: '28px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr 1fr', gap: isMobile ? '12px' : '16px', marginBottom: '28px' }}>
         {/* From */}
         <div>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>From</label>
@@ -204,7 +214,7 @@ export default function TimeConverter({ headingOverride } = {}) {
         {/* Convert to */}
         <div>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>Convert to</label>
-          <MultiSelectDropdown selected={selectedZones} onChange={setSelectedZones} />
+          <MultiSelectDropdown selected={selectedZones} onChange={setSelectedZones} isMobile={isMobile} />
         </div>
 
         {/* Date */}
@@ -234,7 +244,7 @@ export default function TimeConverter({ headingOverride } = {}) {
       {conversions.length > 0 && (
         <div>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>Results</label>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(160px, 1fr))', gap: '12px' }}>
             {conversions.map(conv => (
               <div
                 key={conv.zone}
