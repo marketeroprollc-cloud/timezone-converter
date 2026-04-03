@@ -1,4 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+function useIsMobile(breakpoint = 600) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const CITIES = [
   { name: 'New York', offset: -5, flag: '🗽', tz: 'EST' },
@@ -30,6 +41,7 @@ const STATUS_STYLES = {
 };
 
 export default function MeetingPlanner({ headingOverride } = {}) {
+  const isMobile = useIsMobile();
   const [meetingHour, setMeetingHour] = useState(14);
 
   const workingCount = CITIES.filter(c => getStatus(getLocalTime(meetingHour, c.offset)) === 'work').length;
@@ -43,15 +55,10 @@ export default function MeetingPlanner({ headingOverride } = {}) {
   };
 
   return (
-    <div style={{
-      background: 'white',
-      borderRadius: '20px',
-      padding: '32px',
-      boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
-    }}>
+    <div style={{ background: 'white', borderRadius: '20px', padding: isMobile ? '20px' : '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
       <div style={{ marginBottom: '28px' }}>
         <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', borderRadius: '10px', padding: '6px 10px', fontSize: '18px' }}>📅</span>
+          <span style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', borderRadius: '10px', padding: '6px 10px', fontSize: '18px', flexShrink: 0 }}>📅</span>
           {headingOverride || 'Global Meeting Planner'}
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>Drag the slider to find the best meeting time for your global team</p>
@@ -97,7 +104,7 @@ export default function MeetingPlanner({ headingOverride } = {}) {
       </div>
 
       {/* City grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '10px' }}>
         {CITIES.map(city => {
           const localH = getLocalTime(meetingHour, city.offset);
           const status = getStatus(localH);
@@ -108,26 +115,22 @@ export default function MeetingPlanner({ headingOverride } = {}) {
 
           return (
             <div key={city.name} style={{
-              background: s.bg,
-              border: `1px solid ${s.border}`,
-              borderRadius: '14px',
-              padding: '14px 16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '14px',
+              background: s.bg, border: `1px solid ${s.border}`, borderRadius: '14px',
+              padding: isMobile ? '12px 14px' : '14px 16px',
+              display: 'flex', alignItems: 'center', gap: '12px',
             }}>
-              <span style={{ fontSize: '28px', lineHeight: 1 }}>{city.flag}</span>
+              <span style={{ fontSize: '24px', lineHeight: 1, flexShrink: 0 }}>{city.flag}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-                  <span style={{ fontSize: '22px', fontWeight: '800', color: s.text, lineHeight: 1 }}>
+                  <span style={{ fontSize: '20px', fontWeight: '800', color: s.text, lineHeight: 1 }}>
                     {String(displayH).padStart(2,'0')}:{localM}
                   </span>
-                  <span style={{ fontSize: '13px', color: s.subtext, fontWeight: '600' }}>{period}</span>
+                  <span style={{ fontSize: '12px', color: s.subtext, fontWeight: '600' }}>{period}</span>
                 </div>
                 <div style={{ fontSize: '13px', fontWeight: '600', color: s.text, marginTop: '2px' }}>{city.name}</div>
                 <div style={{ fontSize: '11px', color: s.subtext }}>{city.tz} · UTC{city.offset >= 0 ? '+' : ''}{city.offset}</div>
               </div>
-              <div style={{ background: s.badge, borderRadius: '8px', padding: '4px 8px', fontSize: '10px', fontWeight: '600', color: s.badgeText, whiteSpace: 'nowrap' }}>
+              <div style={{ background: s.badge, borderRadius: '8px', padding: '4px 8px', fontSize: '10px', fontWeight: '600', color: s.badgeText, flexShrink: 0 }}>
                 {s.label}
               </div>
             </div>

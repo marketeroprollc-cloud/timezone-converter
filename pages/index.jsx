@@ -124,7 +124,7 @@ export default function Home() {
 
           {/* MeetingPlanner with SEO-optimized heading */}
           <section aria-label="Global Meeting Planner">
-            <MeetingPlanner headingOverride="Find the Best Meeting Time Across Time Zones" />
+            <MeetingPlanner headingOverride="Global Meeting Planner" />
           </section>
 
           {/* Popular conversions — internal links for SEO */}
