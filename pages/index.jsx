@@ -154,6 +154,31 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Blog section — internal links for SEO authority */}
+          <div style={{ background: 'white', borderRadius: '20px', padding: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', borderRadius: '10px', padding: '6px 10px', fontSize: '18px' }}>📝</span>
+              Time Zone Guides &amp; Tips
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '10px', marginBottom: '16px' }}>
+              {[
+                { label: 'Best Time to Schedule EST ↔ PST Meetings', slug: 'best-time-schedule-meeting-est-pst' },
+                { label: 'How to Schedule Meetings Across Time Zones', slug: 'how-to-schedule-meeting-across-time-zones' },
+                { label: 'UTC Explained: What Is UTC Offset?', slug: 'utc-explained' },
+                { label: 'Daylight Saving Time Explained', slug: 'daylight-saving-time-explained' },
+                { label: 'US Time Zones: EST, CST, MST, PST', slug: 'time-zones-united-states' },
+                { label: 'India Time Zone (IST) Guide', slug: 'india-time-zone-ist' },
+              ].map(({ label, slug }) => (
+                <Link key={slug} href={`/blog/${slug}`} style={{ display: 'block', padding: '10px 14px', background: '#f0fdf4', borderRadius: '10px', border: '1px solid #bbf7d0', color: '#059669', fontSize: '13px', fontWeight: '600', textDecoration: 'none' }}>
+                  {label}
+                </Link>
+              ))}
+            </div>
+            <Link href="/blog" style={{ fontSize: '13px', color: '#6366f1', fontWeight: '600', textDecoration: 'none' }}>
+              View all guides →
+            </Link>
+          </div>
+
           <FAQ />
 
           {/* Ad slot — after FAQ */}
@@ -207,6 +232,7 @@ export default function Home() {
               ].map(({ label, slug }) => (
                 <a key={slug} href={`/convert/${slug}`} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>{label}</a>
               ))}
+              <Link href="/blog" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Blog</Link>
               <Link href="/privacy" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>Privacy Policy</Link>
             </div>
           </div>
