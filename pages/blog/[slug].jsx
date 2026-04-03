@@ -97,6 +97,27 @@ export default function BlogPost({ post }) {
             ))}
           </article>
 
+          {/* CTA — tool link, always visible, high SEO value */}
+          <div style={{ background: 'linear-gradient(135deg, #1e3a8a, #4c1d95)', borderRadius: '20px', padding: '28px 32px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '24px' }}>⏰</span>
+              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'white', margin: 0 }}>
+                Try the Free Time Zone Converter
+              </h2>
+            </div>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: '1.6' }}>
+              Convert time zones instantly and find the best meeting time for your global team — no signup required.
+            </p>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <Link href="/" style={{ display: 'inline-block', background: 'white', color: '#1e3a8a', fontWeight: '700', fontSize: '14px', padding: '10px 22px', borderRadius: '10px', textDecoration: 'none' }}>
+                Open Time Zone Converter →
+              </Link>
+              <Link href="/#meeting-planner" style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', color: 'white', fontWeight: '600', fontSize: '14px', padding: '10px 22px', borderRadius: '10px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>
+                Meeting Planner
+              </Link>
+            </div>
+          </div>
+
           {/* Ad slot — between article and FAQ (high visibility) */}
           <AdSense slot="horizontal" />
 
@@ -123,8 +144,8 @@ export default function BlogPost({ post }) {
                     {label}
                   </Link>
                 ))}
-                <Link href="/" style={{ padding: '8px 16px', background: '#f8fafc', borderRadius: '999px', border: '1px solid #e2e8f0', color: '#64748b', fontSize: '13px', fontWeight: '600', textDecoration: 'none' }}>
-                  Full Time Zone Converter →
+                <Link href="/" style={{ padding: '8px 16px', background: '#1e3a8a', borderRadius: '999px', color: 'white', fontSize: '13px', fontWeight: '600', textDecoration: 'none' }}>
+                  🌍 Full Time Zone Converter →
                 </Link>
               </div>
             </div>
