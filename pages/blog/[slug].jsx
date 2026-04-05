@@ -1,5 +1,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
+
+// Renders content strings with [anchor text](/path) as real links
+function RichText({ text, style }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return (
+    <p style={style}>
+      {parts.map((part, i) => {
+        const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (match) {
+          return <Link key={i} href={match[2]} style={{ color: '#2563eb', textDecoration: 'underline', fontWeight: '600' }}>{match[1]}</Link>;
+        }
+        return part;
+      })}
+    </p>
+  );
+}
 import { BLOG_POSTS, getBlogPost } from '../../lib/blog-posts';
 import { FAQSchema, BreadcrumbSchema } from '../../components/SchemaMarkup';
 import { CITY_PAIRS, TIMEZONE_DATA } from '../../lib/timezone-pairs';
@@ -90,9 +106,7 @@ export default function BlogPost({ post }) {
                 <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', margin: '0 0 12px', paddingBottom: '8px', borderBottom: '2px solid #f1f5f9' }}>
                   {section.h2}
                 </h2>
-                <p style={{ fontSize: '15px', color: '#475569', lineHeight: '1.75', margin: 0 }}>
-                  {section.content}
-                </p>
+                <RichText text={section.content} style={{ fontSize: '15px', color: '#475569', lineHeight: '1.75', margin: 0 }} />
               </section>
             ))}
           </article>

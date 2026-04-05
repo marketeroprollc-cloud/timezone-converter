@@ -21,6 +21,7 @@ const BLOG_SLUGS = [
   'sydney-to-london-time',
   'time-zone-abbreviations',
   'remote-work-time-zone-tips',
+  'pst-time-zone',
 ];
 
 function generateSitemap() {
